@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-nav-bar title="账号登录" left-arrow />
+    <van-nav-bar title="账号登录" left-arrow @click-left="$router.back()" />
     <van-form @submit="onSubmit">
       <van-field
         v-model="username"
@@ -28,7 +28,8 @@
 <script>
 import { userLoginApi } from '@/api/login'
 export default {
-  created () { },
+  created () {
+  },
   data () {
     return {
       username: '',
@@ -37,12 +38,25 @@ export default {
   },
   methods: {
     async onSubmit (values) {
-      const res = await userLoginApi({
-        username: this.username,
-        password: this.password
-      })
-      this.$store.commit('setUser', res.data.body.token)
-      console.log(res)
+      try {
+        const res = await userLoginApi(values)
+        this.$store.commit('setUser', res.data.body)
+        console.log(res)
+      } catch (err) {
+        console.log(err)
+      }
+      if (this.$store.state.user && this.$store.state.user.token) {
+        this.$toast.success('登录成功')
+        setTimeout(async () => {
+          try {
+            await this.$router.push('/my')
+          } catch (err) {
+            console.log(err)
+          }
+        }, 2000)
+      } else {
+        this.$toast.fail('账号密码错误')
+      }
     }
   },
   computed: {},

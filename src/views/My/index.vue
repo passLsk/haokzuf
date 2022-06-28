@@ -1,16 +1,31 @@
 <template>
   <div>
     <div class="my-title">
-      <div class="banner"></div>
-      <div class="login">
-        <van-image
-          round
-          class="img-size"
-          src="https://img01.yzcdn.cn/vant/cat.jpeg"
-        />
-        <p>游客</p>
-        <div class="login-btn" @click="$router.push('/login')">去登录</div>
-      </div>
+      <template v-if="user && user.token">
+        <div class="banner1"></div>
+        <div class="login">
+          <van-image
+            round
+            class="img-size"
+            src="https://img01.yzcdn.cn/vant/cat.jpeg"
+          />
+          <p>进去的黑马</p>
+          <div class="login-btn" @click="logout">退出</div>
+          <p>编辑个人资料</p>
+        </div>
+      </template>
+      <template v-else>
+        <div class="banner"></div>
+        <div class="loginout">
+          <van-image
+            round
+            class="img-size"
+            src="https://img01.yzcdn.cn/vant/cat.jpeg"
+          />
+          <p>游客</p>
+          <div class="login-btn" @click="$router.push('/login')">去登录</div>
+        </div>
+      </template>
     </div>
     <div class="my-body">
       <van-grid :column-num="3" :gutter="0">
@@ -23,19 +38,31 @@
       </van-grid>
     </div>
     <div class="my-footer">
-      <img src="@/assets/my-join.png" alt="">
+      <img src="@/assets/my-join.png" alt="" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   created () { },
   data () {
     return {}
   },
-  methods: {},
-  computed: {},
+  methods: {
+    async logout () {
+      try {
+        await this.$dialog.confirm({ message: '确定退出吗？' })
+        this.$store.commit('setUser', {})
+      } catch (err) {
+        console.log(err)
+      }
+    }
+  },
+  computed: {
+    ...mapState(['user'])
+  },
   watch: {},
   filters: {},
   components: {}
@@ -53,7 +80,13 @@ export default {
   height: 382px;
   background: url("@/assets/My-bg.png") no-repeat 0 0 / cover;
 }
-.login {
+.banner1 {
+  width: 750px;
+  height: 562px;
+  background: url("@/assets/avatar.png") no-repeat 0 0 / cover;
+}
+.login,
+.loginout {
   width: 637.5px;
   height: 330px;
   background-color: white;
