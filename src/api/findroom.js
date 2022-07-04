@@ -1,9 +1,9 @@
-// import request from '@/utils/request'
-// export const findroomApi = ({ id }) => {
-//   return request({
-//     url: '/area/map/:id',
-//     params: {
-//       id
-//     }
-//   })
-// }
+import request from '@/utils/request'
+export const findroomApi = ({ cityId }) => {
+  return request({
+    url: '/houses',
+    params: {
+      cityId
+    }
+  })
+}

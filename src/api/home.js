@@ -4,3 +4,16 @@ export const swipeApi = () => {
     url: '/home/swiper'
   })
 }
+export const MyCityListApi = (level) => {
+  return request({
+    url: '/area/city',
+    params: {
+      level
+    }
+  })
+}
+export const hotCityApi = () => {
+  return request({
+    url: '/area/hot'
+  })
+}

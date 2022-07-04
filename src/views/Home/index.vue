@@ -1,14 +1,28 @@
 <template>
   <div class="main">
-    <van-search v-model="value" label="地址" placeholder="请输入搜索关键词">
+    <!-- <van-search v-model="value" label="地址" placeholder="请输入搜索关键词">
       <template #label>
         <h2>北京 <van-icon name="arrow-down" /></h2>
       </template>
       <template #right-icon>
         <i class="toutiao toutiao-fenxiang"></i>
       </template>
-    </van-search>
-
+    </van-search> -->
+    <div class="home-search">
+      <div class="left">
+        <h3 @click="$router.push({ name: 'city' })">
+          {{ nowCity }}<van-icon name="arrow-down" />
+        </h3>
+      </div>
+      <div class="middle">
+        <p>
+          <van-icon class="icon-search" name="search" />请输入搜索小区或地址
+        </p>
+      </div>
+      <div class="right">
+        <van-icon class="icon-comment" name="comment-circle-o" />
+      </div>
+    </div>
     <van-swipe :autoplay="3000">
       <van-swipe-item v-for="(image, index) in images" :key="index">
         <img v-lazy="'http://liufusong.top:8080' + image" />
@@ -68,13 +82,15 @@
 import { swipeApi } from '@/api/home.js'
 export default {
   async created () {
+    this.nowCity = this.$store.state.nowC
     const res = await swipeApi()
     res.data.body.forEach(item => this.images.push(item.imgSrc))
   },
   data () {
     return {
       images: [],
-      value: ''
+      value: '',
+      nowCity: '北京'
     }
   },
   methods: {},
@@ -109,6 +125,7 @@ export default {
   p {
     font-size: 28px;
     padding-top: 20px;
+    padding-left: 18px;
   }
 }
 .van-cell {
@@ -140,9 +157,6 @@ export default {
   text-align: center;
   line-height: 68px;
   border-radius: 3px;
-  div {
-    height: 68px;
-  }
 }
 .toutiao-fenxiang[data-v-1d9b105c]:before {
   color: red;
@@ -151,5 +165,44 @@ export default {
 h2[data-v-1d9b105c] {
   font-size: 30px;
   padding-left: 10px;
+}
+.home-search {
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  left: 52px;
+  top: 20px;
+  z-index: 2;
+  background-color: #fff;
+  .left {
+    font-size: 24px;
+    color: black;
+    h3 {
+      padding: 0 8px;
+    }
+  }
+  .middle {
+    width: 540px;
+    height: 68px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    p {
+      border-left: 1px solid #cdcccc;
+      padding-left: 10px;
+    }
+  }
+  .right {
+    .icon-comment {
+      margin-right: -90px;
+      color: white;
+      font-size: 60px;
+      height: 68px;
+      line-height: 68px;
+      vertical-align: middle;
+    }
+  }
 }
 </style>

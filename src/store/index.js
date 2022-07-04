@@ -7,13 +7,24 @@ const vuexLocal = new VuexPersistence({
 })
 export default new Vuex.Store({
   state: {
-    user: {}
+    user: {},
+    nowC: '',
+    cityList: []
   },
   getters: {
+    cityID (state) {
+      return state.cityList.filter(item => item.label === state.nowC)[0].value
+    }
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
+    },
+    setNowC (state, payload) {
+      state.nowC = payload
+    },
+    setCityList (state, payload) {
+      state.cityList = payload
     }
   },
   actions: {
