@@ -29,11 +29,11 @@
       </van-swipe-item>
     </van-swipe>
     <van-row type="flex" justify="space-around" gutter="6">
-      <van-col span="6"
+      <van-col  @click="$router.push({name:'FindRoom'})" span="6"
         ><van-icon name="wap-home-o" size="50" />
         <p>整租</p></van-col
       >
-      <van-col span="6"
+      <van-col  @click="$router.push({name:'FindRoom'})" span="6"
         ><van-icon name="wap-home-o" size="50" />
         <p>合租</p></van-col
       >
@@ -41,7 +41,7 @@
         ><van-icon name="award-o" size="50" />
         <p>地图找房</p></van-col
       >
-      <van-col span="6"
+      <van-col span="6" @click="$router.push({name:'renthouse'})"
         ><van-icon name="wap-home-o" size="50" />
         <p>去出租</p></van-col
       >

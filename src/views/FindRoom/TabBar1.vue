@@ -1,6 +1,6 @@
 <template>
   <div>
-    <van-popup v-model="show" class="aere-popup">
+    <van-popup v-model="show" class="aere-popup" :class="{ active: id === 1 }">
       <div>
         <van-area
           cancel-button-text=" "
@@ -8,10 +8,7 @@
           :area-list="areaList"
         />
         <div class="btn" @click="$emit('update:show', !show)">
-          <van-button
-            class="btn-default"
-            type="default"
-            >取消</van-button
+          <van-button class="btn-default" type="default">取消</van-button
           ><van-button class="btn-primary" type="primary">确定</van-button>
         </div>
       </div>
@@ -22,6 +19,10 @@
 <script>
 export default {
   props: {
+    id: {
+      type: [Number, String],
+      required: true
+    },
     areaList: {
       type: Object,
       required: true

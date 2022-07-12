@@ -16,7 +16,8 @@ const routes = [
       ]
   },
   { path: '/login', name: 'login', component: () => import('@/views/Login') },
-  { path: '/city', name: 'city', component: () => import('@/views/Home/components/MyCity.vue') }
+  { path: '/city', name: 'city', component: () => import('@/views/Home/components/MyCity.vue') },
+  { path: '/renthouse', name: 'renthouse', component: () => import('@/components/MyAddHouse.vue') }
 ]
 
 const router = new VueRouter({

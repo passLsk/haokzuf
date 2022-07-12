@@ -23,7 +23,7 @@
     <div class="tabbar">
       <van-row>
         <van-col v-for="(item, index) in arr" :key="index" span="6">
-          <h3 :class="{ active: index === 0 }" @click="colFn(index)">
+          <h3 :class="{ active: index === id }" @click="colFn(index)">
             {{ item }} <van-icon name="arrow-down" />
           </h3>
         </van-col>
@@ -96,7 +96,7 @@ export default {
     return {
       roomList: [],
       value: '',
-      id: '',
+      id: 0,
       arr: ['区域', '方式', '租金', '筛选'],
       areaList: {
         province_list: {
@@ -114,24 +114,24 @@ export default {
         }
       },
       areaList1: {
-        province_list: {
-          110000: ''
-        },
+        // province_list: {
+        //   110000: ''
+        // },
         city_list: {
           110100: '不限',
           110300: '整租',
           110200: '合租'
-        },
-        county_list: {
-          110301: '',
-          110102: '',
-          110202: ''
         }
+        // county_list: {
+        //   110301: '',
+        //   110102: '',
+        //   110202: ''
+        // }
       },
       areaList2: {
-        province_list: {
-          110000: ''
-        },
+        // province_list: {
+        //   110000: ''
+        // },
         city_list: {
           110100: '租金',
           110200: '1000及以下',
@@ -142,12 +142,12 @@ export default {
           110800: '6000-7000',
           110900: '7000以上',
           110700: '5000-6000'
-        },
-        county_list: {
-          110301: '',
-          110102: '',
-          110202: ''
         }
+        // county_list: {
+        //   110301: '',
+        //   110102: '',
+        //   110202: ''
+        // }
       },
       isShow: false
     }
